@@ -1,27 +1,22 @@
 import * as React from 'react';
-import { connect }                         from 'react-redux';
-import { bindActionCreators, Dispatch }    from 'redux';
-import * as actions                        from '../../../actions';
-import { AppAction, AppAllActions, AppState, NoteProps } from '../../interfaces';
-import { FullNote }                            from '../components';
-
-interface AppHomeDispatch {
-  actions: AppAllActions;
-}
+// import { connect } from 'react-redux';
+// import { bindActionCreators, Dispatch } from 'redux';
+/*
 
 interface AppRoute {
   match: any;
-}
+}*/
 
-class NoteContainer extends React.Component<NoteProps & AppRoute & AppHomeDispatch, {}> {
+class HomeContainer extends React.Component<any, {}> {
 
-  render() {
+  public render() {
     return (
-      <FullNote {...this.props}/>
+      <div> home</div>
     );
   }
 }
-
+export default HomeContainer;
+/*
 export default connect<NoteProps, AppHomeDispatch>(
   (state: AppState) => ({
     notes: state.notes.byId,
@@ -30,4 +25,4 @@ export default connect<NoteProps, AppHomeDispatch>(
   (dispatch: Dispatch<AppAction>) => ({
     actions: bindActionCreators(actions, dispatch)
   })
-)(NoteContainer);
+)(NoteContainer);*/
