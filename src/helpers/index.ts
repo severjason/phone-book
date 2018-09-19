@@ -1,0 +1,34 @@
+import { AppContact } from '../app/Contact/interfaces';
+
+export const compareNames = (a: any, b: any) => {
+  const nameA: string = a.name.first.toLowerCase();
+  const nameB: string = b.name.first.toLowerCase();
+  if (nameA < nameB) {
+    return -1;
+  }
+  if (nameA > nameB) {
+    return 1;
+  }
+  return 0;
+};
+
+export const getFirstChart = (array: AppContact[], index: number) => array[index].name.first.charAt(0).toLowerCase();
+
+export const insertDividers = (array: AppContact[]) => {
+  if (array.length === 0) {
+    return array;
+  }
+  const result: any[] = [{
+    divider: getFirstChart(array, 0),
+  }];
+  for (let i = 1; i < array.length - 1; i++) {
+    if (getFirstChart(array, i) !== getFirstChart(array, i + 1)) {
+      result.push(array[i], {
+        divider: getFirstChart(array, i + 1),
+      });
+    } else {
+      result.push(array[i]);
+    }
+  }
+  return result;
+};

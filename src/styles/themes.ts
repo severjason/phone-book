@@ -4,8 +4,8 @@ export const mainTheme = {
     navSearchBackground: 'rgba(256, 256, 256, .15)',
     navSearchBackgroundHover: 'rgba(256, 256, 256, .25)',
   },
-  paddings: {
-
+  dimensions: {
+    navMinHeightRem: 4.5,
   },
   borders: {
     mainBorderRadiusPx: 4,

@@ -7,3 +7,7 @@ export interface AppContact {
   };
   phone: string[];
 }
+
+export interface AppContactDivider {
+  divider: string;
+}

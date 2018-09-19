@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 const NavBarStyles = styled.div`
    width: 100%;
+   .app-bar {
+    min-height: ${props => props.theme.dimensions.navMinHeightRem}rem;
+   }
    .home-button {
     margin-left: -12px;
     margin-right: 20px;
@@ -42,6 +45,9 @@ const NavBarStyles = styled.div`
    }
    
    @media all and (max-width: ${props => props.theme.media.mobileMaxWidthPx}px) {
+   .app-bar {
+    min-height: ${props => props.theme.dimensions.navMinHeightRem * 0.9}rem;
+   }
     .title {
       display: none;
     }

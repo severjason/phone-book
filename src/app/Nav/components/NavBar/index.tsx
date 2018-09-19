@@ -7,7 +7,7 @@ import { Search, ContactPhoneRounded } from '@material-ui/icons';
 const NavBar: React.StatelessComponent<{}> = () => (
   <NavBarStyles>
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar className="app-bar">
         <Tooltip title={'All contacts'}>
           <Link to={'/'}>
             <IconButton  className="home-button">

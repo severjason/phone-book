@@ -1,28 +1,40 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { fetchContacts } from '../redux/actions';
-import { AppHomeAction } from '../interfaces';
+import { AppHomeAction, AppHomeProps } from '../interfaces';
+import { AppState } from '../../../store/interfaces';
+import { getSortedContactsWithDividers } from '../redux/selectors';
+import { Home } from '../components';
 
 interface AppHomeDispatch {
   fetchContacts: () => AppHomeAction;
 }
 
-class HomeContainer extends React.Component<AppHomeDispatch, {}> {
+class HomeContainer extends React.Component<AppHomeProps & AppHomeDispatch, {}> {
 
   public componentDidMount() {
-    const { fetchContacts } = this.props;
-    fetchContacts();
+    const {fetchContacts, contacts} = this.props;
+    if (contacts.length === 0) {
+      fetchContacts();
+    }
   }
 
   public render() {
+    const {contacts, isLoading, error} = this.props;
     return (
-      <div> home</div>
+      <Home contacts={contacts} isLoading={isLoading} error={error}/>
     );
   }
 }
 
-export default connect<{}, AppHomeDispatch>(
-  null,
+const mapStateToProps = (state: AppState) => ({
+  isLoading: state.contactsState.isLoading,
+  contacts: getSortedContactsWithDividers(state.contactsState),
+  error: state.contactsState.error,
+});
+
+export default connect<AppHomeProps, AppHomeDispatch>(
+  mapStateToProps,
   {
     fetchContacts,
   })(HomeContainer);
