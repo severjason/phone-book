@@ -6,7 +6,6 @@ import * as types from './types';
 export function* fetchContacts(action: AppHomeAction) {
   try {
     const response: any = yield call(fetchData);
-    console.log(response.data);
     yield put({
       type: types.FETCH_CONTACTS_SUCCESS,
       payload: response.data
