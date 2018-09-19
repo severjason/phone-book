@@ -6,10 +6,10 @@ import { BaseLayout } from '../app/layouts';
 interface AppRoute {
   match: any;
 }
-const NotesPage: React.StatelessComponent<RouteComponentProps<AppRoute>> = (props) => (
+const HomePage: React.StatelessComponent<RouteComponentProps<AppRoute>> = (props) => (
   <BaseLayout>
     <HomeContainer {...props}/>
   </BaseLayout>
 );
 
-export default withRouter(NotesPage);
+export default withRouter(HomePage);

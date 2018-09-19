@@ -5,6 +5,9 @@ const NavBarStyles = styled.div`
    .app-bar {
     min-height: ${props => props.theme.dimensions.navMinHeightRem}rem;
    }
+   .back-button {
+      color: ${props => props.theme.colors.whiteColor};
+   }
    .home-button {
     margin-left: -12px;
     margin-right: 20px;
@@ -37,15 +40,21 @@ const NavBarStyles = styled.div`
     padding: .1rem .1rem .1rem 4.1rem;
     input {
       width: 10rem;
-      &:focus {
-      width: 15rem;
     }
-      transition: width .15s ease-in;
+    &.add-transition {
+      input {
+        width: 10rem;
+        &:focus {
+        width: 15rem;
+      }
+        transition: width .15s ease-in;
+      }
     }
    }
    
    @media all and (max-width: ${props => props.theme.media.mobileMaxWidthPx}px) {
    .app-bar {
+    padding: 0 .7rem;
     min-height: ${props => props.theme.dimensions.navMinHeightRem * 0.9}rem;
    }
     .title {
@@ -54,9 +63,14 @@ const NavBarStyles = styled.div`
     .search-input {
       input {
         width: 7rem;
+     }
+     &.add-transition {
+      input {
+        width: 7rem;
         &:focus {
         width: 10rem;
       }
+     }
      }
     }
   }
