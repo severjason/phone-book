@@ -1,13 +1,18 @@
 import * as React from 'react';
-// import { connect } from 'react-redux';
-// import { bindActionCreators, Dispatch } from 'redux';
-/*
+import { connect } from 'react-redux';
+import { fetchContacts } from '../redux/actions';
+import { AppHomeAction } from '../interfaces';
 
-interface AppRoute {
-  match: any;
-}*/
+interface AppHomeDispatch {
+  fetchContacts: () => AppHomeAction;
+}
 
-class HomeContainer extends React.Component<any, {}> {
+class HomeContainer extends React.Component<AppHomeDispatch, {}> {
+
+  public componentDidMount() {
+    const { fetchContacts } = this.props;
+    fetchContacts();
+  }
 
   public render() {
     return (
@@ -15,14 +20,9 @@ class HomeContainer extends React.Component<any, {}> {
     );
   }
 }
-export default HomeContainer;
-/*
-export default connect<NoteProps, AppHomeDispatch>(
-  (state: AppState) => ({
-    notes: state.notes.byId,
-    activeCategory: state.categories.activated,
-  }),
-  (dispatch: Dispatch<AppAction>) => ({
-    actions: bindActionCreators(actions, dispatch)
-  })
-)(NoteContainer);*/
+
+export default connect<{}, AppHomeDispatch>(
+  null,
+  {
+    fetchContacts,
+  })(HomeContainer);

@@ -1,13 +1,11 @@
-/*
-import * as icoTypes from "../actions/ico/types";
-import { SUBSCRIBE_USER_REQUEST } from "../actions/subscription/types";
-import { FETCH_HYPE_FEED_REQUEST } from "../actions/hypefeed/types";
-import { FETCH_ABOUT_PAGE_REQUEST, FETCH_ADVERTS_REQUEST } from "../actions/templates/types";
+import { all, takeLatest } from 'redux-saga/effects';
+import { FETCH_CONTACTS_REQUEST } from '../app/Home/redux/types';
+import { fetchContacts } from '../app/Home/redux/saga';
 
 function* rootSaga() {
   yield all([
-    yield takeLatest(icoTypes.FETCH_ICO_SEARCHES_REQUEST, fetchIcoSearches),
+    yield takeLatest(FETCH_CONTACTS_REQUEST, fetchContacts),
   ]);
 }
 
-export default rootSaga;*/
+export default rootSaga;

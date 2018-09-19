@@ -1,6 +1,6 @@
 import * as types from './types';
-import { AppHomeActions } from '../interfaces';
+import { AppHomeAction } from '../interfaces';
 
-export const fetchContacts = (): AppHomeActions => ({
+export const fetchContacts = (): AppHomeAction => ({
   type: types.FETCH_CONTACTS_REQUEST
 });
