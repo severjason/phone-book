@@ -8,7 +8,7 @@ export interface AppNavState {
 export interface AppSearchProps {
   isLoading: boolean;
   contacts: AppContact[];
-  searchInput?: string;
+  searchInput: string;
 }
 
 export interface AppNavProps {

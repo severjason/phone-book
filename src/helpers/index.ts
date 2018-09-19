@@ -32,3 +32,17 @@ export const insertDividers = (array: AppContact[]) => {
   }
   return result;
 };
+
+const filterPhones = (phones: string[], input: string): boolean => {
+  const numInput: number = +input;
+  const result: string[] = phones.filter((phone) => phone.includes(input)
+    || phone.replace(/\D+/g, '').includes(numInput.toString()));
+  return !!result.length;
+};
+
+export const filterContacts = (contacts: AppContact[], input: string) => {
+  return contacts.filter((contact) =>
+    filterPhones(contact.phone, input)
+    || contact.name.first.toLowerCase().includes(input.toLowerCase())
+    || contact.name.last.toLowerCase().includes(input.toLowerCase()));
+};

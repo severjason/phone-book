@@ -6,6 +6,7 @@ import { AppSearchActions, AppSearchProps } from '../redux/interfaces';
 import { AppState } from '../../../store/interfaces';
 import { getSortedContacts } from '../../Home/redux/selectors';
 import { Search } from '../components';
+import { filterContacts } from '../../../helpers';
 
 class SearchContainer extends React.Component<AppSearchProps & AppSearchActions, any> {
 
@@ -24,13 +25,21 @@ class SearchContainer extends React.Component<AppSearchProps & AppSearchActions,
   }
 
   public componentDidUpdate(props: AppSearchProps) {
-    console.log(this.props.searchInput);
+    const {searchInput, contacts} = this.props;
+    if (searchInput !== props.searchInput) {
+      this.setState({contacts: filterContacts(contacts, searchInput)});
+    }
   }
 
   public render() {
-    const {contacts, isLoading} = this.props;
+    const {isLoading, searchInput} = this.props;
+    const {contacts} = this.state;
     return (
-     <Search contacts={contacts} isLoading={isLoading}/>
+     <Search
+       contacts={!contacts.length && !searchInput ? this.props.contacts : contacts}
+       isLoading={isLoading}
+       searchInput={searchInput}
+     />
     );
   }
 }

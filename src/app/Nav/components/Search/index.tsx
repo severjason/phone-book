@@ -11,6 +11,8 @@ const Search: React.StatelessComponent<AppSearchProps> = ({contacts, isLoading})
       : contacts.map((contact: AppContact & AppContactDivider) =>
         <div key={`${contact.id}${contact.name.first}`}>
         {contact.name.first}
+          {contact.name.last}
+          {contact.phone.map((phone) => <div key={phone}>{phone}</div>)}
       </div>)
     }
   </SearchStyles>

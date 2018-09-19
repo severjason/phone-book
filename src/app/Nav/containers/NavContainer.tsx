@@ -6,6 +6,7 @@ import { AppNavProps } from '../redux/interfaces';
 import { AppState } from '../../../store/interfaces';
 import { NavBar } from '../components';
 import { withRouter } from 'react-router';
+import { escape } from 'lodash';
 
 class NavContainer extends React.Component<any, {}> {
 
@@ -25,7 +26,7 @@ class NavContainer extends React.Component<any, {}> {
 
   public handleSearch = (e: any) => {
     const {startSearch} = this.props;
-    startSearch(e.target.value);
+    startSearch(escape(e.target.value));
   }
 
   public render() {
