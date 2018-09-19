@@ -1,11 +1,11 @@
 import { AppNavAction } from './interfaces';
-import { FINISHED, STARTED } from './types';
+import { INPUT_CLEARED, INPUT_CHANGED } from './types';
 
-export const startSearch = (input: string): AppNavAction => ({
-  type: STARTED,
+export const onSearchChange = (input: string): AppNavAction => ({
+  type: INPUT_CHANGED,
   payload: input,
 });
 
-export const finishSearch = (): AppNavAction => ({
-  type: FINISHED,
+export const clearSearchInput = (): AppNavAction => ({
+  type: INPUT_CLEARED,
 });

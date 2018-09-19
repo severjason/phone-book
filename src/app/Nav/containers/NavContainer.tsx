@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { finishSearch, startSearch } from '../redux/actions';
+import { clearSearchInput, onSearchChange } from '../redux/actions';
 import { fetchContacts } from '../../Home/redux/actions';
 import { AppNavProps } from '../redux/interfaces';
 import { AppState } from '../../../store/interfaces';
@@ -50,7 +50,7 @@ const mapStateToProps = (state: AppState) => ({
 export default connect<AppNavProps, any>(
   mapStateToProps,
   {
-    startSearch,
-    finishSearch,
+    startSearch: onSearchChange,
+    finishSearch: clearSearchInput,
     fetchContacts,
   })(withRouter(NavContainer));

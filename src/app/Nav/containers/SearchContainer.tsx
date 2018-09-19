@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { finishSearch, startSearch } from '../redux/actions';
+import { clearSearchInput, onSearchChange } from '../redux/actions';
 import { fetchContacts } from '../../Home/redux/actions';
 import { AppSearchActions, AppSearchProps } from '../redux/interfaces';
 import { AppState } from '../../../store/interfaces';
@@ -53,7 +53,7 @@ const mapStateToProps = (state: AppState) => ({
 export default connect<AppSearchProps, AppSearchActions>(
   mapStateToProps,
   {
-    startSearch,
-    finishSearch,
+    startSearch: onSearchChange,
+    finishSearch: clearSearchInput,
     fetchContacts,
   })(SearchContainer);

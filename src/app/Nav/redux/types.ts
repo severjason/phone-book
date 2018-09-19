@@ -1,4 +1,4 @@
 const IDENTIFIER = '[search]';
 
-export const STARTED = `${IDENTIFIER}STARTED`;
-export const FINISHED = `${IDENTIFIER}FINISHED`;
+export const INPUT_CHANGED = `${IDENTIFIER}INPUT_CHANGED`;
+export const INPUT_CLEARED = `${IDENTIFIER}INPUT_CLEARED`;
