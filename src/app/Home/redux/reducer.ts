@@ -26,7 +26,7 @@ export default function homeReducer(state: AppHomeState = INITIAL_STATE, action:
       return {
         ...state,
         isLoading: false,
-        contacts: action.payload,
+        error: action.payload,
       };
     }
     default: {

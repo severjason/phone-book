@@ -6,6 +6,7 @@ export interface AppContact {
     last: string;
   };
   phone: string[];
+  expanded: boolean;
 }
 
 export interface AppContactDivider {

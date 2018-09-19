@@ -7,12 +7,16 @@ export interface AppHomeAction {
 
 export interface AppHomeState {
   isLoading: boolean;
-  error: null | object;
+  error: null | string;
   contacts: AppContact[];
 }
 
 export interface AppHomeProps {
   isLoading: boolean;
   contacts: AppContact[];
-  error: null | object;
+  error?: null | string;
+}
+
+export interface AppHomeDispatch {
+  fetchContacts: () => AppHomeAction;
 }

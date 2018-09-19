@@ -2,13 +2,18 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { clearSearchInput, onSearchChange } from '../redux/actions';
 import { fetchContacts } from '../../Home/redux/actions';
-import { AppNavProps } from '../redux/interfaces';
+import { AppNavProps, AppNavDispatch } from '../redux/interfaces';
 import { AppState } from '../../../store/interfaces';
 import { NavBar } from '../components';
-import { withRouter } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { escape } from 'lodash';
 
-class NavContainer extends React.Component<any, {}> {
+interface AppRoute {
+  match: any;
+  history: any;
+}
+
+class NavContainer extends React.Component<RouteComponentProps<AppRoute> & AppNavDispatch & AppNavProps, {}> {
 
   public isOnSearch = () => {
     const {match} = this.props;
@@ -22,11 +27,11 @@ class NavContainer extends React.Component<any, {}> {
     }
   }
 
-  public clearInput = () => this.props.finishSearch();
+  public clearInput = () => this.props.clearSearchInput();
 
   public handleSearch = (e: any) => {
-    const {startSearch} = this.props;
-    startSearch(escape(e.target.value));
+    const {onSearchChange} = this.props;
+    onSearchChange(escape(e.target.value));
   }
 
   public render() {
@@ -47,10 +52,10 @@ const mapStateToProps = (state: AppState) => ({
   inputValue: state.searchState.inputValue,
 });
 
-export default connect<AppNavProps, any>(
+export default connect<AppNavProps, AppNavDispatch>(
   mapStateToProps,
   {
-    startSearch: onSearchChange,
-    finishSearch: clearSearchInput,
+    onSearchChange,
+    clearSearchInput,
     fetchContacts,
   })(withRouter(NavContainer));

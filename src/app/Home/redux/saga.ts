@@ -13,7 +13,7 @@ export function* fetchContacts(action: AppHomeAction) {
   } catch (error) {
     yield put({
       type: types.FETCH_CONTACTS_FAILURE,
-      payload: error,
+      payload: error.message,
     });
   }
 }

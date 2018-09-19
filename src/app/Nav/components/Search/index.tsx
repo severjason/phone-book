@@ -1,20 +1,12 @@
 import * as React from 'react';
 import SearchStyles from './styles';
 import Preloader from '../../../common/Preloader';
-import { AppContact, AppContactDivider } from '../../../Contact/interfaces';
 import { AppSearchProps } from '../../redux/interfaces';
+import { ContactsList } from '../../../Home/components';
 
 const Search: React.StatelessComponent<AppSearchProps> = ({contacts, isLoading}) => (
   <SearchStyles>
-    {isLoading
-      ? <Preloader/>
-      : contacts.map((contact: AppContact & AppContactDivider) =>
-        <div key={`${contact.id}${contact.name.first}`}>
-        {contact.name.first}
-          {contact.name.last}
-          {contact.phone.map((phone) => <div key={phone}>{phone}</div>)}
-      </div>)
-    }
+    {isLoading ? <Preloader/> : <ContactsList contacts={contacts}/>}
   </SearchStyles>
 );
 

@@ -7,6 +7,7 @@ export interface AppNavState {
 
 export interface AppSearchProps {
   isLoading: boolean;
+  error?: null | string;
   contacts: AppContact[];
   searchInput: string;
 }
@@ -20,8 +21,8 @@ export interface AppNavAction {
   payload?: string;
 }
 
-export interface AppSearchActions {
-  startSearch: (input: string) => AppNavAction;
-  finishSearch: () => AppNavAction;
+export interface AppNavDispatch {
+  onSearchChange: (input: string) => AppNavAction;
+  clearSearchInput: () => AppNavAction;
   fetchContacts: () => AppHomeAction;
 }

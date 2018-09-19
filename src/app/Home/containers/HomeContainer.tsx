@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { fetchContacts } from '../redux/actions';
-import { AppHomeAction, AppHomeProps } from '../interfaces';
+import { AppHomeDispatch, AppHomeProps } from '../interfaces';
 import { AppState } from '../../../store/interfaces';
 import { getSortedContactsWithDividers } from '../redux/selectors';
 import { Home } from '../components';
-
-interface AppHomeDispatch {
-  fetchContacts: () => AppHomeAction;
-}
+import { ErrorPage } from '../../common';
 
 class HomeContainer extends React.Component<AppHomeProps & AppHomeDispatch, {}> {
 
@@ -22,7 +19,7 @@ class HomeContainer extends React.Component<AppHomeProps & AppHomeDispatch, {}> 
   public render() {
     const {contacts, isLoading, error} = this.props;
     return (
-      <Home contacts={contacts} isLoading={isLoading} error={error}/>
+      error ? <ErrorPage error={error}/> : <Home contacts={contacts} isLoading={isLoading}/>
     );
   }
 }

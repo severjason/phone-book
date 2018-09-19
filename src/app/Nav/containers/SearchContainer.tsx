@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { clearSearchInput, onSearchChange } from '../redux/actions';
 import { fetchContacts } from '../../Home/redux/actions';
-import { AppSearchActions, AppSearchProps } from '../redux/interfaces';
+import { AppSearchProps } from '../redux/interfaces';
+import { AppHomeDispatch } from '../../Home/interfaces';
 import { AppState } from '../../../store/interfaces';
 import { getSortedContacts } from '../../Home/redux/selectors';
 import { Search } from '../components';
 import { filterContacts } from '../../../helpers';
+import { ErrorPage } from '../../common';
 
-class SearchContainer extends React.Component<AppSearchProps & AppSearchActions, any> {
+class SearchContainer extends React.Component<AppSearchProps & AppHomeDispatch, any> {
 
-  constructor(props: AppSearchProps & AppSearchActions) {
+  constructor(props: AppSearchProps & AppHomeDispatch) {
     super(props);
     this.state = {
       contacts: this.props.contacts,
@@ -32,28 +33,31 @@ class SearchContainer extends React.Component<AppSearchProps & AppSearchActions,
   }
 
   public render() {
-    const {isLoading, searchInput} = this.props;
+    const {isLoading, searchInput, error} = this.props;
     const {contacts} = this.state;
     return (
-     <Search
-       contacts={!contacts.length && !searchInput ? this.props.contacts : contacts}
-       isLoading={isLoading}
-       searchInput={searchInput}
-     />
+      error
+        ? <ErrorPage error={error}/>
+        : (
+          <Search
+            contacts={!contacts.length && !searchInput ? this.props.contacts : contacts}
+            isLoading={isLoading}
+            searchInput={searchInput}
+          />
+        )
     );
   }
 }
 
 const mapStateToProps = (state: AppState) => ({
   isLoading: state.contactsState.isLoading,
+  error: state.contactsState.error,
   contacts: getSortedContacts(state.contactsState),
   searchInput: state.searchState.inputValue,
 });
 
-export default connect<AppSearchProps, AppSearchActions>(
+export default connect<AppSearchProps, AppHomeDispatch>(
   mapStateToProps,
   {
-    startSearch: onSearchChange,
-    finishSearch: clearSearchInput,
     fetchContacts,
   })(SearchContainer);
