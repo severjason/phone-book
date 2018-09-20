@@ -7,21 +7,8 @@ import { getSortedContactsWithDividers } from '../redux/selectors';
 import { Home } from '../components';
 import { ErrorPage } from '../../common';
 import { toggleContact, deleteContact } from '../../Contact/redux/actions';
-import { AppSearchProps } from '../../Nav/interfaces';
-import { AppContact } from '../../Contact/interfaces';
 
-interface AppHomeState {
-  contacts: AppContact[];
-}
-
-class HomeContainer extends React.Component<AppHomeProps & AppHomeDispatch, AppHomeState> {
-
-  constructor(props: AppHomeProps & AppHomeDispatch) {
-    super(props);
-    this.state = {
-      contacts: this.props.contacts,
-    };
-  }
+class HomeContainer extends React.Component<AppHomeProps & AppHomeDispatch, {}> {
 
   public componentDidMount() {
     const {fetchContacts, contacts} = this.props;
@@ -30,22 +17,14 @@ class HomeContainer extends React.Component<AppHomeProps & AppHomeDispatch, AppH
     }
   }
 
-  public componentDidUpdate(props: AppHomeProps, state: AppSearchProps) {
-    const {contacts} = this.props;
-    if (contacts.length !== state.contacts.length) {
-      this.setState({contacts:  props.contacts});
-    }
-  }
-
   public render() {
-    const {isLoading, error, toggleContact, deleteContact} = this.props;
-    const {contacts} = this.state;
+    const {isLoading, error, toggleContact, deleteContact, contacts} = this.props;
     return (
       error
         ? <ErrorPage error={error}/>
         : (
           <Home
-            contacts={!contacts.length ? this.props.contacts : contacts}
+            contacts={contacts}
             isLoading={isLoading}
             toggleContact={toggleContact}
             deleteContact={deleteContact}

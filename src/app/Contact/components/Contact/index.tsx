@@ -1,16 +1,16 @@
 import * as React from 'react';
-// import { AppContact } from '../../interfaces';
-// import { AppSearchDispatch } from '../../../Nav/interfaces';
+import { AppContact } from '../../interfaces';
+import { AppSearchDispatch } from '../../../Nav/interfaces';
 import { Card, CardHeader, CardContent, Typography, Divider, CardActionArea } from '@material-ui/core';
 import { Phone } from '@material-ui/icons';
 import ContactStyles from './styles';
 import { ContactButtons } from '../../components';
 
-/*interface AppContactProps {
+interface AppContactProps {
   contact: AppContact;
-}*/
+}
 
-class Contact extends React.Component<any, {}> {
+class Contact extends React.Component<AppContactProps & AppSearchDispatch, {}> {
 
   private getExpandedClass(): string {
     const {contact} = this.props;
