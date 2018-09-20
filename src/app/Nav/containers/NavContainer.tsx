@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { clearSearchInput, onSearchChange } from '../redux/actions';
 import { fetchContacts } from '../../Home/redux/actions';
-import { AppNavProps, AppNavDispatch } from '../redux/interfaces';
+import { AppNavProps, AppNavDispatch } from '../interfaces';
 import { AppState } from '../../../store/interfaces';
 import { NavBar } from '../components';
 import { RouteComponentProps, withRouter } from 'react-router';

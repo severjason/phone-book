@@ -1,5 +1,7 @@
 import { AppHomeAction, AppHomeState } from '../interfaces';
-import * as types from './types';
+import * as homeTypes from './types';
+import * as contactTypes from '../../Contact/redux/types';
+import { AppContact, AppContactAction } from '../../Contact/interfaces';
 
 const INITIAL_STATE: AppHomeState = {
   isLoading: false,
@@ -7,26 +9,41 @@ const INITIAL_STATE: AppHomeState = {
   contacts: [],
 };
 
-export default function homeReducer(state: AppHomeState = INITIAL_STATE, action: AppHomeAction) {
+export default function homeReducer(state: AppHomeState = INITIAL_STATE, action: AppHomeAction & AppContactAction) {
   switch (action.type) {
-    case types.FETCH_CONTACTS_REQUEST: {
+    case homeTypes.FETCH_CONTACTS_REQUEST: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case types.FETCH_CONTACTS_SUCCESS: {
+    case homeTypes.FETCH_CONTACTS_SUCCESS: {
       return {
         ...state,
         isLoading: false,
         contacts: action.payload,
       };
     }
-    case types.FETCH_CONTACTS_FAILURE: {
+    case homeTypes.FETCH_CONTACTS_FAILURE: {
       return {
         ...state,
         isLoading: false,
         error: action.payload,
+      };
+    }
+    case contactTypes.TOGGLE_CONTACT_PHONES: {
+      return {
+        ...state,
+        contacts: state.contacts.map((contact: AppContact) => {
+          contact.expanded = (contact.id === action.payload) ? !contact.expanded : false;
+          return contact;
+        })
+      };
+    }
+    case contactTypes.DELETE_CONTACT: {
+      return {
+        ...state,
+        contacts: state.contacts.filter((contact: AppContact) => contact.id !== action.payload)
       };
     }
     default: {

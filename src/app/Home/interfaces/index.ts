@@ -1,4 +1,4 @@
-import { AppContact } from '../../Contact/interfaces';
+import { AppContact, AppContactAction } from '../../Contact/interfaces';
 
 export interface AppHomeAction {
   type: string;
@@ -19,4 +19,6 @@ export interface AppHomeProps {
 
 export interface AppHomeDispatch {
   fetchContacts: () => AppHomeAction;
+  toggleContact: (id: number) => AppContactAction;
+  deleteContact: (id: number) => AppContactAction;
 }

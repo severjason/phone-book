@@ -9,6 +9,23 @@ const ContactStyles = styled.div`
   .card-action {
     width: 100%;
   }
+  .phones-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  
+  .contact-content {
+    display: none;
+    padding: 1.5rem;
+    &.expanded {
+      display: block;
+    }
+    &:last-child {
+      padding-bottom: 1.5rem;
+    }
+  }
 `;
 
 export default ContactStyles;

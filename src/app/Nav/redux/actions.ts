@@ -1,4 +1,4 @@
-import { AppNavAction } from './interfaces';
+import { AppNavAction } from '../interfaces';
 import { INPUT_CLEARED, INPUT_CHANGED } from './types';
 
 export const onSearchChange = (input: string): AppNavAction => ({

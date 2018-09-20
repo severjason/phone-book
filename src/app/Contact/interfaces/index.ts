@@ -12,3 +12,8 @@ export interface AppContact {
 export interface AppContactDivider {
   divider: string;
 }
+
+export interface AppContactAction {
+  type: string;
+  payload?: number;
+}

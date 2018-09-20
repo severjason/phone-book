@@ -13,6 +13,12 @@ const AlertDialogStyles = styled.div`
     align-items: center;
   }
   
+  .confirm-button-icon {
+    color: ${props => props.theme.colors.greenColor};
+  }
+  .cancel-button-icon {
+    color: ${props => props.theme.colors.errorColor};
+  }
 `;
 
 export default AlertDialogStyles;

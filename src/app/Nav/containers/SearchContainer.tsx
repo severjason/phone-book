@@ -1,17 +1,22 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { fetchContacts } from '../../Home/redux/actions';
-import { AppSearchProps } from '../redux/interfaces';
-import { AppHomeDispatch } from '../../Home/interfaces';
+import { AppSearchProps, AppSearchDispatch } from '../interfaces';
 import { AppState } from '../../../store/interfaces';
 import { getSortedContacts } from '../../Home/redux/selectors';
 import { Search } from '../components';
 import { filterContacts } from '../../../helpers';
 import { ErrorPage } from '../../common';
+import { toggleContact, deleteContact } from '../../Contact/redux/actions';
+import { AppHomeAction } from '../../Home/interfaces';
 
-class SearchContainer extends React.Component<AppSearchProps & AppHomeDispatch, any> {
+interface AppSearchContainerDispatch extends AppSearchDispatch {
+  fetchContacts: () => AppHomeAction;
+}
 
-  constructor(props: AppSearchProps & AppHomeDispatch) {
+class SearchContainer extends React.Component<AppSearchProps & AppSearchContainerDispatch, any> {
+
+  constructor(props: AppSearchProps & AppSearchContainerDispatch) {
     super(props);
     this.state = {
       contacts: this.props.contacts,
@@ -33,7 +38,7 @@ class SearchContainer extends React.Component<AppSearchProps & AppHomeDispatch, 
   }
 
   public render() {
-    const {isLoading, searchInput, error} = this.props;
+    const {isLoading, searchInput, error, toggleContact, deleteContact} = this.props;
     const {contacts} = this.state;
     return (
       error
@@ -43,6 +48,8 @@ class SearchContainer extends React.Component<AppSearchProps & AppHomeDispatch, 
             contacts={!contacts.length && !searchInput ? this.props.contacts : contacts}
             isLoading={isLoading}
             searchInput={searchInput}
+            toggleContact={toggleContact}
+            deleteContact={deleteContact}
           />
         )
     );
@@ -56,8 +63,10 @@ const mapStateToProps = (state: AppState) => ({
   searchInput: state.searchState.inputValue,
 });
 
-export default connect<AppSearchProps, AppHomeDispatch>(
+export default connect<AppSearchProps, AppSearchContainerDispatch>(
   mapStateToProps,
   {
     fetchContacts,
+    toggleContact,
+    deleteContact,
   })(SearchContainer);

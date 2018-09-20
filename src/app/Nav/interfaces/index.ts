@@ -1,4 +1,4 @@
-import { AppContact } from '../../Contact/interfaces';
+import { AppContact, AppContactAction } from '../../Contact/interfaces';
 import { AppHomeAction } from '../../Home/interfaces';
 
 export interface AppNavState {
@@ -25,4 +25,9 @@ export interface AppNavDispatch {
   onSearchChange: (input: string) => AppNavAction;
   clearSearchInput: () => AppNavAction;
   fetchContacts: () => AppHomeAction;
+}
+
+export interface AppSearchDispatch {
+  toggleContact: (id: number) => AppContactAction;
+  deleteContact: (id: number) => AppContactAction;
 }

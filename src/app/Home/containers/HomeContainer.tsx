@@ -6,8 +6,9 @@ import { AppState } from '../../../store/interfaces';
 import { getSortedContactsWithDividers } from '../redux/selectors';
 import { Home } from '../components';
 import { ErrorPage } from '../../common';
+import { toggleContact, deleteContact } from '../../Contact/redux/actions';
 
-class HomeContainer extends React.Component<AppHomeProps & AppHomeDispatch, {}> {
+class HomeContainer extends React.Component<AppHomeProps & AppHomeDispatch , {}> {
 
   public componentDidMount() {
     const {fetchContacts, contacts} = this.props;
@@ -17,9 +18,18 @@ class HomeContainer extends React.Component<AppHomeProps & AppHomeDispatch, {}> 
   }
 
   public render() {
-    const {contacts, isLoading, error} = this.props;
+    const {contacts, isLoading, error, toggleContact} = this.props;
     return (
-      error ? <ErrorPage error={error}/> : <Home contacts={contacts} isLoading={isLoading}/>
+      error
+        ? <ErrorPage error={error}/>
+        : (
+          <Home
+            contacts={contacts}
+            isLoading={isLoading}
+            toggleContact={toggleContact}
+            deleteContact={deleteContact}
+          />
+        )
     );
   }
 }
@@ -34,4 +44,6 @@ export default connect<AppHomeProps, AppHomeDispatch>(
   mapStateToProps,
   {
     fetchContacts,
+    toggleContact,
+    deleteContact,
   })(HomeContainer);

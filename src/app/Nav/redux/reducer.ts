@@ -1,4 +1,4 @@
-import { AppNavAction, AppNavState } from './interfaces';
+import { AppNavAction, AppNavState } from '../interfaces';
 import * as types from './types';
 
 const INITIAL_STATE: AppNavState = {

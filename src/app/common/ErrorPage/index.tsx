@@ -6,7 +6,7 @@ interface AppErrorPageProps {
   error: string;
 }
 
-const EmptyPage: React.StatelessComponent<AppErrorPageProps> = ({error}) => {
+const ErrorPage: React.StatelessComponent<AppErrorPageProps> = ({error}) => {
   return (
     <ErrorPageStyles>
       <Paper className="page-message-container">
@@ -16,4 +16,4 @@ const EmptyPage: React.StatelessComponent<AppErrorPageProps> = ({error}) => {
   );
 };
 
-export default EmptyPage;
+export default ErrorPage;

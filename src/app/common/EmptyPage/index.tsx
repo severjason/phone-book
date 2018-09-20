@@ -6,7 +6,7 @@ const EmptyPage: React.StatelessComponent<{}> = () => {
   return (
     <EmptyPageStyles>
       <Paper className="page-message-container">
-        No contacts
+        No contacts found...
       </Paper>
     </EmptyPageStyles>
   );

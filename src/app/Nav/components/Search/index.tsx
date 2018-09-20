@@ -1,12 +1,12 @@
 import * as React from 'react';
 import SearchStyles from './styles';
 import Preloader from '../../../common/Preloader';
-import { AppSearchProps } from '../../redux/interfaces';
+import { AppSearchProps, AppSearchDispatch } from '../../interfaces';
 import { ContactsList } from '../../../Home/components';
 
-const Search: React.StatelessComponent<AppSearchProps> = ({contacts, isLoading}) => (
+const Search: React.StatelessComponent<AppSearchProps & AppSearchDispatch> = (props) => (
   <SearchStyles>
-    {isLoading ? <Preloader/> : <ContactsList contacts={contacts}/>}
+    {props.isLoading ? <Preloader/> : <ContactsList {...props}/>}
   </SearchStyles>
 );
 
