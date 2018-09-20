@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ContactsDividerStyles from './styles';
-import { Paper, Typography } from '@material-ui/core';
+import { Message } from 'semantic-ui-react';
 
 interface AppContactsDividerProps {
   divider: string;
@@ -9,11 +9,11 @@ interface AppContactsDividerProps {
 const ContactsDivider: React.StatelessComponent<AppContactsDividerProps> = ({divider}) => {
   return (
     <ContactsDividerStyles>
-      <Paper className="divider" >
-        <Typography variant="headline" component="p" className="title">
+      <Message >
+        <p className="title">
           {divider.toUpperCase()}
-        </Typography>
-      </Paper>
+        </p>
+      </Message>
     </ContactsDividerStyles>
   );
 };

@@ -4,6 +4,10 @@ const NavBarStyles = styled.div`
    width: 100%;
    .app-bar {
     min-height: ${props => props.theme.dimensions.navMinHeightRem}rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
    }
    .back-button {
       color: ${props => props.theme.colors.whiteColor};

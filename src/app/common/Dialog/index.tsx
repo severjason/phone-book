@@ -1,45 +1,24 @@
 import * as React from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, IconButton } from '@material-ui/core';
-import { Check, Close } from '@material-ui/icons';
 import AlertDialogStyles from './styles';
+import { Button, Popup } from 'semantic-ui-react';
 
 interface AlertDialogProps {
-  opened: boolean;
   onClose: () => void;
-  onConfirm: () => void;
-  title: string;
+  onDelete: () => void;
+  content: any;
 }
 
-const AlertDialog: React.StatelessComponent<AlertDialogProps> = ({opened, onClose, onConfirm, children, title}) => (
-  <Dialog
-    open={opened}
-    onClose={onClose}
-    aria-labelledby="alert-dialog-title"
-    aria-describedby="alert-dialog-description"
-  >
-    <AlertDialogStyles>
-      <DialogTitle className="dialog-title">{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          {children}
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions className="buttons-container">
-        <IconButton
-          onClick={() => {
-            onConfirm();
-            onClose();
-          }}
-          autoFocus={true}
-        >
-          <Check className="confirm-button-icon"/>
-        </IconButton>
-        <IconButton onClick={onClose}>
-          <Close className="cancel-button-icon"/>
-        </IconButton>
-      </DialogActions>
-    </AlertDialogStyles>
-  </Dialog>
+const AlertDialog: React.StatelessComponent<AlertDialogProps> = ({onClose, onDelete, content}) => (
+  <AlertDialogStyles>
+    <Popup
+      wide={true}
+      trigger={content}
+      on="click"
+      content={<Button color="green" content="Confirm" fluid={true} onClick={onDelete} />}
+      hoverable={true}
+    />
+  </AlertDialogStyles>
+
 );
 
 export default AlertDialog;

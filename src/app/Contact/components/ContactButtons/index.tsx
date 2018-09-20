@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { DeleteForeverOutlined, EditOutlined } from '@material-ui/icons';
-import { IconButton, Tooltip } from '@material-ui/core';
+import { Icon } from 'semantic-ui-react';
 import ContactButtonStyles from './styles';
 import { AlertDialog } from '../../../common';
-import { AppContact, AppContactAction } from '../../interfaces';
+import { AppContactAction } from '../../interfaces';
 
 interface AppContactButtonsProps {
-  contact: AppContact;
+  id: number;
   deleteContact: (id: number) => AppContactAction;
 }
 
@@ -16,35 +15,22 @@ interface AppNoteButtonsState {
 
 class ContactButtons extends React.Component<AppContactButtonsProps, AppNoteButtonsState> {
 
-  public state = {
-    opened: false,
-  };
-
-  private openDialog = () => this.setState(() => ({opened: true}));
-
   private closeDialog = () => this.setState(() => ({opened: false}));
 
   public render() {
-    const {contact, deleteContact} = this.props;
-    const {opened} = this.state;
+    const {id, deleteContact} = this.props;
     return (
       <ContactButtonStyles>
-        <AlertDialog
-          title={`Are you sure? `}
-          onClose={this.closeDialog}
-          opened={opened}
-          onConfirm={() => deleteContact(contact.id)}
-        />
-        <Tooltip title={`Edit contact`}>
-          <IconButton onClick={() => console.log(contact)} className="contact-button">
-            <EditOutlined className="contact-icon edit-icon"/>
-          </IconButton>
-        </Tooltip>
-        <Tooltip title={`Delete contact`}>
-          <IconButton onClick={this.openDialog} className="contact-button">
-            <DeleteForeverOutlined className="contact-icon delete-icon"/>
-          </IconButton>
-        </Tooltip>
+          <div onClick={() => console.log(id)} className="contact-button">
+            <Icon name="edit outline" className="contact-icon edit-icon"/>
+          </div>
+          <div className="contact-button">
+            <AlertDialog
+              content={<Icon name={'trash alternate outline'} className="contact-icon delete-icon"/>}
+              onClose={this.closeDialog}
+              onDelete={() => deleteContact(id)}
+            />
+          </div>
       </ContactButtonStyles>
     );
   }

@@ -42,6 +42,7 @@ const filterPhones = (phones: string[], input: string): boolean => {
 };
 
 export const filterContacts = (contacts: AppContact[], input: string) => {
+  console.log(input);
   return contacts.filter((contact) =>
     filterPhones(contact.phone, input)
     || contact.name.first.toLowerCase().includes(input.toLowerCase())

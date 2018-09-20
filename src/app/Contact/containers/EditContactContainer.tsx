@@ -19,7 +19,6 @@ class EditContactContainer extends React.Component<RouteComponentProps<AppRoute>
 }
 
 const mapStateToProps = (state: AppState) => ({
-  inputValue: state.searchState.inputValue,
 });
 
 export default connect<any, {}>(
