@@ -3,10 +3,10 @@ import { DeleteForeverOutlined, EditOutlined } from '@material-ui/icons';
 import { IconButton, Tooltip } from '@material-ui/core';
 import ContactButtonStyles from './styles';
 import { AlertDialog } from '../../../common';
-import { AppContact, AppContactAction } from '../../interfaces';
+import { AppContactAction } from '../../interfaces';
 
 interface AppContactButtonsProps {
-  contact: AppContact;
+  contactId: number;
   deleteContact: (id: number) => AppContactAction;
 }
 
@@ -25,7 +25,7 @@ class ContactButtons extends React.Component<AppContactButtonsProps, AppNoteButt
   private closeDialog = () => this.setState(() => ({opened: false}));
 
   public render() {
-    const {contact, deleteContact} = this.props;
+    const {contactId, deleteContact} = this.props;
     const {opened} = this.state;
     return (
       <ContactButtonStyles>
@@ -33,10 +33,10 @@ class ContactButtons extends React.Component<AppContactButtonsProps, AppNoteButt
           title={`Are you sure? `}
           onClose={this.closeDialog}
           opened={opened}
-          onConfirm={() => deleteContact(contact.id)}
+          onConfirm={() => deleteContact(contactId)}
         />
         <Tooltip title={`Edit contact`}>
-          <IconButton onClick={() => console.log(contact)} className="contact-button">
+          <IconButton onClick={() => console.log(contactId)} className="contact-button">
             <EditOutlined className="contact-icon edit-icon"/>
           </IconButton>
         </Tooltip>

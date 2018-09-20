@@ -14,14 +14,7 @@ interface AppSearchContainerDispatch extends AppSearchDispatch {
   fetchContacts: () => AppHomeAction;
 }
 
-class SearchContainer extends React.Component<AppSearchProps & AppSearchContainerDispatch, any> {
-
-  constructor(props: AppSearchProps & AppSearchContainerDispatch) {
-    super(props);
-    this.state = {
-      contacts: this.props.contacts,
-    };
-  }
+class SearchContainer extends React.PureComponent<AppSearchProps & AppSearchContainerDispatch, {}> {
 
   public componentDidMount() {
     const {fetchContacts, contacts} = this.props;
@@ -30,25 +23,14 @@ class SearchContainer extends React.Component<AppSearchProps & AppSearchContaine
     }
   }
 
-  public componentDidUpdate(props: AppSearchProps, state: AppSearchProps) {
-    const {searchInput, contacts} = this.props;
-    if (contacts.length !== state.contacts.length) {
-      this.setState({contacts:  props.contacts});
-    }
-    if (searchInput !== props.searchInput) {
-      this.setState({contacts: filterContacts(contacts, searchInput)});
-    }
-  }
-
   public render() {
-    const {isLoading, searchInput, error, toggleContact, deleteContact} = this.props;
-    const {contacts} = this.state;
+    const {isLoading, searchInput, error, toggleContact, deleteContact, contacts} = this.props;
     return (
       error
         ? <ErrorPage error={error}/>
         : (
           <Search
-            contacts={!contacts.length && !searchInput ? this.props.contacts : contacts}
+            contacts={filterContacts(contacts, searchInput)}
             isLoading={isLoading}
             searchInput={searchInput}
             toggleContact={toggleContact}

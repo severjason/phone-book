@@ -11,13 +11,13 @@ interface AppContactListProps {
 }
 
 const ContactsList: React.StatelessComponent<AppContactListProps & AppSearchDispatch> = (props) => {
-  const {contacts} = props;
+  const {contacts, toggleContact, deleteContact} = props;
   return (
     <ContactsListStyles>
       {contacts.length ? contacts.map((contact: AppContact & AppContactDivider, index: number) =>
         (contact.divider)
         ? <ContactsDivider key={contact.divider} divider={contact.divider}/>
-        : <Contact key={contact.id} {...props} contact={contact}/>
+        : <Contact key={contact.id} {...contact} toggleContact={toggleContact} deleteContact={deleteContact}/>
       ) : <EmptyPage/>}
     </ContactsListStyles>
   );

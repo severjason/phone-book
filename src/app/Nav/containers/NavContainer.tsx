@@ -6,15 +6,25 @@ import { AppNavProps, AppNavDispatch } from '../interfaces';
 import { AppState } from '../../../store/interfaces';
 import { NavBar } from '../components';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { escape } from 'lodash';
+import { escape, debounce } from 'lodash';
 
 interface AppRoute {
   match: any;
   history: any;
 }
 
-class NavContainer extends React.Component<RouteComponentProps<AppRoute> & AppNavDispatch & AppNavProps, {}> {
+class NavContainer extends React.PureComponent<RouteComponentProps<AppRoute> & AppNavDispatch & AppNavProps, any> {
+  private readonly debouncedSearch: any;
 
+  constructor(props: RouteComponentProps<AppRoute> & AppNavDispatch & AppNavProps) {
+    super(props);
+
+    this.state = {
+      inputValue: '',
+    };
+
+    this.debouncedSearch = debounce(this.props.onSearchChange, 500);
+  }
   public isOnSearch = () => {
     const {match} = this.props;
     return match.path === '/search';
@@ -35,12 +45,11 @@ class NavContainer extends React.Component<RouteComponentProps<AppRoute> & AppNa
   public clearInput = () => this.props.clearSearchInput();
 
   public handleSearch = (e: any) => {
-    const {onSearchChange} = this.props;
-    onSearchChange(escape(e.target.value));
+    this.setState({inputValue: e.target.value}, () => this.debouncedSearch(escape(this.state.inputValue)));
   }
 
   public render() {
-    const {inputValue} = this.props;
+    const {inputValue} = this.state;
     return (
      <NavBar
        isMainPage={this.isMainPage()}

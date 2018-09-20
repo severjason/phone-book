@@ -6,31 +6,26 @@ import { Phone } from '@material-ui/icons';
 import ContactStyles from './styles';
 import { ContactButtons } from '../../components';
 
-interface AppContactProps {
-  contact: AppContact;
-}
-
-class Contact extends React.Component<AppContactProps & AppSearchDispatch, {}> {
+class Contact extends React.PureComponent<AppContact & AppSearchDispatch, {}> {
 
   private getExpandedClass(): string {
-    const {contact} = this.props;
-    return (contact.expanded) ? 'expanded' : '';
+    const {expanded} = this.props;
+    return (expanded) ? 'expanded' : '';
   }
 
   private getHeader(): React.ReactNode {
-    const {contact, toggleContact} = this.props;
+    const {name, id, toggleContact} = this.props;
     return (
       <CardHeader
         className={`contact-header`}
-        title={`${contact.name.first}  ${contact.name.last}`}
-        onClick={() => toggleContact(contact.id)}
+        title={`${name.first}  ${name.last}`}
+        onClick={() => toggleContact(id)}
       />
     );
   }
 
   public render() {
-    const {contact, deleteContact} = this.props;
-    const {phone} = this.props.contact;
+    const {phone, id, deleteContact} = this.props;
     return (
       <ContactStyles>
         <Card className="contact-card">
@@ -49,7 +44,7 @@ class Contact extends React.Component<AppContactProps & AppSearchDispatch, {}> {
             </Typography>
             <Divider/>
             <div className="buttons-container">
-              <ContactButtons contact={contact} deleteContact={deleteContact}/>
+              <ContactButtons contactId={id} deleteContact={deleteContact}/>
             </div>
           </CardContent>
         </Card>

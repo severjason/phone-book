@@ -13,6 +13,9 @@ const NavBarStyles = styled.div`
     margin-right: 20px;
     color: ${props => props.theme.colors.whiteColor};
    }
+   .search-button {
+    color: ${props => props.theme.colors.whiteColor};
+   }
    .flex-grow {
     flex-grow: 1;
    }
