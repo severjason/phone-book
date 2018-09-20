@@ -11,16 +11,26 @@ const ContactStyles = styled.div`
     justify-content: flex-start;
     align-items: center;
     flex-wrap: nowrap;
+    padding: 1rem;
   }
-  
+  .phones-header {
+    padding: .5rem 1.5rem;
+    font-weight: 600;
+  }
+  .buttons-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
   .contact-content {
     display: none;
-    padding: 1.5rem;
+    padding: 0;
     &.expanded {
       display: block;
     }
     &:last-child {
-      padding-bottom: 1.5rem;
+      padding-bottom: 0;
     }
   }
 `;

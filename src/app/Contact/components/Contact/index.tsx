@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { AppContact } from '../../interfaces';
-import { AppSearchDispatch } from '../../../Nav/interfaces';
+// import { AppContact } from '../../interfaces';
+// import { AppSearchDispatch } from '../../../Nav/interfaces';
 import { Card, CardHeader, CardContent, Typography, Divider, CardActionArea } from '@material-ui/core';
 import { Phone } from '@material-ui/icons';
 import ContactStyles from './styles';
 import { ContactButtons } from '../../components';
 
-interface AppContactProps {
+/*interface AppContactProps {
   contact: AppContact;
-}
+}*/
 
-class Contact extends React.Component<AppContactProps & AppSearchDispatch, {}> {
+class Contact extends React.Component<any, {}> {
 
   private getExpandedClass(): string {
     const {contact} = this.props;
@@ -39,11 +39,18 @@ class Contact extends React.Component<AppContactProps & AppSearchDispatch, {}> {
           </CardActionArea>
           <Divider />
           <CardContent className={`contact-content ${this.getExpandedClass()}`}>
-            <Typography component="div" className={`phones-container`}>
-              <Phone/>{phone.map((phone) => <div key={phone}>{phone}</div>)}
+            <Typography component="div" >
+              <Typography component="div" className={'phones-header'}>
+                {phone.length > 1 ? 'Phones:' : 'Phone:'}
+              </Typography>
+              <div className={`phones-container`}>
+                <Phone/>{phone.map((phone: any) => <div key={phone}>{phone}</div>)}
+              </div>
             </Typography>
             <Divider/>
-            <ContactButtons contact={contact} deleteContact={deleteContact}/>
+            <div className="buttons-container">
+              <ContactButtons contact={contact} deleteContact={deleteContact}/>
+            </div>
           </CardContent>
         </Card>
       </ContactStyles>

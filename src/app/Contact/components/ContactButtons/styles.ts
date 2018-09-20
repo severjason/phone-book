@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 const ContactButtonStyles = styled.div`
+  padding: .25rem;
   .contact-button {
-    width: 2.5rem;
-    height: 2.5rem;
     
     .contact-icon {
       font-size: 1.5rem;

@@ -14,7 +14,8 @@ const ContactsList: React.StatelessComponent<AppContactListProps & AppSearchDisp
   const {contacts} = props;
   return (
     <ContactsListStyles>
-      {contacts.length ? contacts.map((contact: AppContact & AppContactDivider, index: number) => (contact.divider)
+      {contacts.length ? contacts.map((contact: AppContact & AppContactDivider, index: number) =>
+        (contact.divider)
         ? <ContactsDivider key={`${contact.divider}${index}`} divider={contact.divider}/>
         : <Contact key={`${contact.id}${contact.name.first}`} {...props} contact={contact}/>
       ) : <EmptyPage/>}

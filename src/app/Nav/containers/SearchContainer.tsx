@@ -30,8 +30,11 @@ class SearchContainer extends React.Component<AppSearchProps & AppSearchContaine
     }
   }
 
-  public componentDidUpdate(props: AppSearchProps) {
+  public componentDidUpdate(props: AppSearchProps, state: AppSearchProps) {
     const {searchInput, contacts} = this.props;
+    if (contacts.length !== state.contacts.length) {
+      this.setState({contacts:  props.contacts});
+    }
     if (searchInput !== props.searchInput) {
       this.setState({contacts: filterContacts(contacts, searchInput)});
     }
