@@ -21,7 +21,7 @@ export const insertDividers = (array: AppContact[]) => {
   const result: any[] = [{
     divider: getFirstChart(array, 0),
   }];
-  for (let i = 1; i < array.length - 1; i++) {
+  for (let i = 0; i < array.length - 1; i++) {
     if (getFirstChart(array, i) !== getFirstChart(array, i + 1)) {
       result.push(array[i], {
         divider: getFirstChart(array, i + 1),
@@ -30,6 +30,7 @@ export const insertDividers = (array: AppContact[]) => {
       result.push(array[i]);
     }
   }
+  result.push(array[array.length - 1]);
   return result;
 };
 
