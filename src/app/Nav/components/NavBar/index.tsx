@@ -5,6 +5,7 @@ import { Search } from '@material-ui/icons';
 import { NavButton } from '../../components';
 
 interface AppNavBarProps {
+  isMainPage: boolean;
   isOnSearch: boolean;
   handleRedirect: () => void;
   handleSearch: (e: any) => void;
@@ -13,11 +14,11 @@ interface AppNavBarProps {
 }
 
 const NavBar: React.StatelessComponent<AppNavBarProps> =
-  ({isOnSearch, handleRedirect, inputValue, handleSearch, clearInput}) => (
+  ({isOnSearch, handleRedirect, inputValue, handleSearch, clearInput, isMainPage}) => (
     <NavBarStyles>
       <AppBar position="static">
         <Toolbar className="app-bar">
-          <NavButton clearInput={clearInput} showBackArrow={isOnSearch}/>
+          <NavButton clearInput={clearInput} showBackArrow={!isMainPage}/>
           <Typography className="title" variant="title" color="inherit" noWrap={true}>
             Phone-book app
           </Typography>

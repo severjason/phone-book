@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IconButton, Tooltip } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { ArrowBackRounded, ContactPhoneRounded } from '@material-ui/icons';
+import { ArrowBackRounded, AddRounded } from '@material-ui/icons';
 
 interface AppNavButtonProps {
   showBackArrow: boolean;
@@ -19,10 +19,10 @@ const NavButton: React.StatelessComponent<AppNavButtonProps> = ({showBackArrow, 
     </Tooltip>
     )
     : (
-      <Tooltip title={'All contacts'}>
-      <Link to={'/'}>
+      <Tooltip title={'Add contact'}>
+      <Link to={'/add'}>
         <IconButton className="home-button" onClick={clearInput}>
-          <ContactPhoneRounded/>
+          <AddRounded/>
         </IconButton>
       </Link>
     </Tooltip>

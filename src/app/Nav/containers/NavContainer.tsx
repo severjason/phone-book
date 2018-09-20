@@ -20,6 +20,11 @@ class NavContainer extends React.Component<RouteComponentProps<AppRoute> & AppNa
     return match.path === '/search';
   }
 
+  public isMainPage = () => {
+    const {match} = this.props;
+    return match.path === '/';
+  }
+
   public handleRedirect = () => {
     const { history } = this.props;
     if (!this.isOnSearch()) {
@@ -38,6 +43,7 @@ class NavContainer extends React.Component<RouteComponentProps<AppRoute> & AppNa
     const {inputValue} = this.props;
     return (
      <NavBar
+       isMainPage={this.isMainPage()}
        isOnSearch={this.isOnSearch()}
        handleRedirect={this.handleRedirect}
        handleSearch={this.handleSearch}

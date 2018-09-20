@@ -3,7 +3,6 @@ import { FETCH_CONTACTS_SUCCESS } from './types';
 import { AppContact } from '../../Contact/interfaces';
 
 export const addExpandedProps = () => (next: any) => (action: AppHomeAction) => {
-
   if (action.type === FETCH_CONTACTS_SUCCESS && action.payload) {
     const updatedAction: AppHomeAction = {
       ...action,
