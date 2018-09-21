@@ -27,9 +27,9 @@ class Contact extends React.PureComponent<AppContact & AppSearchDispatch, {}> {
           <CardActionArea className={`card-action`}>
             {this.getHeader()}
           </CardActionArea>
-          <Divider />
+          <Divider/>
           {expanded && <CardContent className={`contact-content expanded`}>
-            <Typography component="div" >
+            <Typography component="div">
               <Typography component="div" className={'phones-header'}>
                 {phone.length > 1 ? 'Phones:' : 'Phone:'}
               </Typography>

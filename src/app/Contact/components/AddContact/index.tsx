@@ -1,7 +1,19 @@
 import * as React from 'react';
-import { TextField, Tooltip, IconButton  } from '@material-ui/core';
-import { escape } from 'lodash';
-import { Add, Check, Close } from '@material-ui/icons';
+// import { TextField  } from '@material-ui/core';
+// import { Add, Check, Close } from '@material-ui/icons';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+
+const Fieldset = (props: any) => {
+  const {label, name} = props;
+  return (
+    <React.Fragment>
+      <label htmlFor={name}>{label}</label>
+      <Field id={name} name={name} {...props} />
+      <ErrorMessage name={name}/>
+    </React.Fragment>
+  );
+
+};
 
 class AddContactForm extends React.Component<any, any> {
 
@@ -15,24 +27,60 @@ class AddContactForm extends React.Component<any, any> {
     };
   }
 
-  private getInput: any = (phone: string, index: number) => {
+  /* private handleAddPhone = () => {
+     const { phones } = this.state;
+     this.setState({phones: [...phones, '']});
+   }
+
+   private handleChange = (name: string) => (event: any) => {
+     this.setState({[name]: escape(event.target.value)});
+   }*/
+
+  public render() {
     return (
-      <div key={index}>
-        input {phone}
+      <div>
+        <h1>Sign Up</h1>
+        <Formik
+          initialValues={{
+            first: '',
+            lastName: '',
+            animal: '',
+            website: '',
+          }}
+          onSubmit={(values: any) => {
+            setTimeout(() => console.log(JSON.stringify(values, null, 2)), 500);
+          }}
+          render={({isSubmitting, handleReset}: {isSubmitting: any, handleReset: any}) => (
+            <Form>
+              <Fieldset
+                name="first"
+                type="text"
+                label="First name"
+                placeholder="Your first name..."
+              />
+              <Fieldset
+                name="lastName"
+                type="text"
+                label="Last name"
+                placeholder="Your last name..."
+              />
+              <button
+                type="reset"
+                className="secondary"
+                disabled={isSubmitting}
+                onClick={handleReset}
+              >
+                Reset
+              </button>
+              <button type="submit">Submit</button>
+            </Form>
+          )}
+        />
       </div>
     );
   }
 
-  private handleAddPhone = () => {
-    const { phones } = this.state;
-    this.setState({phones: [...phones, '']});
-  }
-
-  private handleChange = (name: string) => (event: any) => {
-    this.setState({[name]: escape(event.target.value)});
-  }
-
-  public render() {
+  /*public render() {
     return (
       <form noValidate={false} autoComplete="off">
         <TextField
@@ -54,17 +102,12 @@ class AddContactForm extends React.Component<any, any> {
           variant="outlined"
         />
         <Tooltip title="Add new category">
-          <IconButton
-            className={`phone-add-button`}
-            onClick={this.handleAddPhone}
-          >
+          <IconButton className={`phone-add-button`} onClick={this.handleAddPhone}>
             <Add className="add-category-toggle-icon"/>
           </IconButton>
         </Tooltip>
         <div>
-          <IconButton
-            className="add-category-button"
-          >
+          <IconButton className="add-category-button">
             <Check className="add-category-icon"/>
           </IconButton>
           <IconButton >
@@ -74,7 +117,7 @@ class AddContactForm extends React.Component<any, any> {
         </div>
       </form>
     );
-  }
+  }*/
 }
 
 export default AddContactForm;
