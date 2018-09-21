@@ -6,16 +6,19 @@ interface AppContactsDividerProps {
   divider: string;
 }
 
-const ContactsDivider: React.StatelessComponent<AppContactsDividerProps> = ({divider}) => {
-  return (
-    <ContactsDividerStyles>
-      <Paper className="divider" >
-        <Typography variant="headline" component="p" className="title">
-          {divider.toUpperCase()}
-        </Typography>
-      </Paper>
-    </ContactsDividerStyles>
-  );
-};
+class ContactsDivider extends React.PureComponent<AppContactsDividerProps, {}> {
+  public render() {
+    const {divider} = this.props;
+    return (
+      <ContactsDividerStyles>
+        <Paper className="divider" >
+          <Typography variant="headline" component="p" className="title">
+            {divider.toUpperCase()}
+          </Typography>
+        </Paper>
+      </ContactsDividerStyles>
+    );
+  }
+}
 
 export default ContactsDivider;

@@ -8,11 +8,6 @@ import { ContactButtons } from '../../components';
 
 class Contact extends React.PureComponent<AppContact & AppSearchDispatch, {}> {
 
-  private getExpandedClass(): string {
-    const {expanded} = this.props;
-    return (expanded) ? 'expanded' : '';
-  }
-
   private getHeader(): React.ReactNode {
     const {name, id, toggleContact} = this.props;
     return (
@@ -25,7 +20,7 @@ class Contact extends React.PureComponent<AppContact & AppSearchDispatch, {}> {
   }
 
   public render() {
-    const {phone, id, deleteContact} = this.props;
+    const {phone, id, deleteContact, expanded} = this.props;
     return (
       <ContactStyles>
         <Card className="contact-card">
@@ -33,7 +28,7 @@ class Contact extends React.PureComponent<AppContact & AppSearchDispatch, {}> {
             {this.getHeader()}
           </CardActionArea>
           <Divider />
-          <CardContent className={`contact-content ${this.getExpandedClass()}`}>
+          {expanded && <CardContent className={`contact-content expanded`}>
             <Typography component="div" >
               <Typography component="div" className={'phones-header'}>
                 {phone.length > 1 ? 'Phones:' : 'Phone:'}
@@ -46,7 +41,7 @@ class Contact extends React.PureComponent<AppContact & AppSearchDispatch, {}> {
             <div className="buttons-container">
               <ContactButtons contactId={id} deleteContact={deleteContact}/>
             </div>
-          </CardContent>
+          </CardContent>}
         </Card>
       </ContactStyles>
     );
