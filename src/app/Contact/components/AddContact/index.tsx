@@ -1,84 +1,71 @@
 import * as React from 'react';
-// import { TextField  } from '@material-ui/core';
-// import { Add, Check, Close } from '@material-ui/icons';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Field, FieldArray, reduxForm, InjectedFormProps } from 'redux-form';
+import validate from './validate';
 
-const Fieldset = (props: any) => {
-  const {label, name} = props;
+const renderField = (props: any) => {
+  const { input, label, type, meta: { touched, error } } = props;
   return (
-    <React.Fragment>
-      <label htmlFor={name}>{label}</label>
-      <Field id={name} name={name} {...props} />
-      <ErrorMessage name={name}/>
-    </React.Fragment>
+    <div>
+      <label>{label}</label>
+      <div>
+        <input {...input} type={type} placeholder={label}/>
+        {touched && error && <span>{error}</span>}
+      </div>
+    </div>
   );
-
+};
+const renderPhones = (props: any) => {
+  const { fields, meta: { error } } = props;
+  return (
+    <ul>
+      <li>
+        <button type="button" onClick={() => fields.push()}>Add Phone</button>
+      </li>
+      {fields.map((phone: any, index: number) =>
+        <li key={index}>
+          <button
+            type="button"
+            title="Remove Hobby"
+            onClick={() => fields.remove(index)}
+          >
+            {`Remove Phone No.${index + 1}`}
+          </button>
+          <Field
+            name={phone}
+            type="text"
+            component={renderField}
+            label={`Phone No.${index + 1}`}
+          />
+        </li>
+      )}
+      {error && <li className="error">{error}</li>}
+    </ul>
+  );
 };
 
-class AddContactForm extends React.Component<any, any> {
-
-  constructor(props: any) {
-    super(props);
-
-    this.state = {
-      firstName: '',
-      lastName: '',
-      phones: [''],
-    };
-  }
-
-  /* private handleAddPhone = () => {
-     const { phones } = this.state;
-     this.setState({phones: [...phones, '']});
-   }
-
-   private handleChange = (name: string) => (event: any) => {
-     this.setState({[name]: escape(event.target.value)});
-   }*/
+class FieldArraysForm extends React.Component<InjectedFormProps<any>, {}> {
 
   public render() {
+    const { pristine, reset, submitting, handleSubmit } = this.props;
     return (
-      <div>
-        <h1>Sign Up</h1>
-        <Formik
-          initialValues={{
-            first: '',
-            lastName: '',
-            animal: '',
-            website: '',
-          }}
-          onSubmit={(values: any) => {
-            setTimeout(() => console.log(JSON.stringify(values, null, 2)), 500);
-          }}
-          render={({isSubmitting, handleReset}: {isSubmitting: any, handleReset: any}) => (
-            <Form>
-              <Fieldset
-                name="first"
-                type="text"
-                label="First name"
-                placeholder="Your first name..."
-              />
-              <Fieldset
-                name="lastName"
-                type="text"
-                label="Last name"
-                placeholder="Your last name..."
-              />
-              <button
-                type="reset"
-                className="secondary"
-                disabled={isSubmitting}
-                onClick={handleReset}
-              >
-                Reset
-              </button>
-              <button type="submit">Submit</button>
-            </Form>
-          )}
-        />
-      </div>
+      <form onSubmit={handleSubmit}>
+        <Field name="firstName" type="text" component={renderField} label="First name"/>
+        <Field name="lastName" type="text" component={renderField} label="Last Name"/>
+        <FieldArray name="phones" component={renderPhones}/>
+        <div>
+          <button type="submit" disabled={submitting || pristine}>Submit</button>
+          <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+        </div>
+      </form>
     );
   }
+}
+
+export default reduxForm({
+  form: 'fieldArrays',
+  validate,
+  onSubmit: (values: any) => console.log(values),
+})(FieldArraysForm);
 
   /*public render() {
     return (
@@ -118,6 +105,3 @@ class AddContactForm extends React.Component<any, any> {
       </form>
     );
   }*/
-}
-
-export default AddContactForm;
