@@ -1,9 +1,8 @@
 import { call, put } from 'redux-saga/effects';
-import { AppHomeAction } from '../interfaces';
 import { fetchData } from '../../../api';
 import * as types from './types';
 
-export function* fetchContacts(action: AppHomeAction) {
+export function* fetchContacts() {
   try {
     const response: any = yield call(fetchData);
     yield put({

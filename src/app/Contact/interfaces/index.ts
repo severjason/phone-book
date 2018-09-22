@@ -1,3 +1,4 @@
+import { AppHomeAction } from '../../Home/interfaces';
 
 export interface AppContact {
   id: number;
@@ -17,4 +18,8 @@ export interface AppContactDivider {
 export interface AppContactAction {
   type: string;
   payload?: number;
+}
+
+export interface AppEditContactDispatch {
+  fetchContacts: () => AppHomeAction;
 }

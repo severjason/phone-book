@@ -1,9 +1,9 @@
 import Contact from './Contact';
 import ContactButtons from './ContactButtons';
-import AddContactForm from './AddContact';
+import EditContact from './EditContact';
 
 export {
   Contact,
   ContactButtons,
-  AddContactForm,
+  EditContact,
 };

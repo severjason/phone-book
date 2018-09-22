@@ -10,7 +10,7 @@ interface AppRoute {
 const AddContactPage: React.StatelessComponent<RouteComponentProps<AppRoute>> = (props) => (
   <BaseLayout>
     <Helmet title={'Add contacts'}/>
-    <AddContactContainer {...props}/>
+    <AddContactContainer {...props} />
   </BaseLayout>
 );
 

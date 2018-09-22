@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../store/interfaces';
 import { RouteComponentProps } from 'react-router';
-import { AddContactForm } from '../components';
+import { ContactForm } from '../../common';
 
 interface AppRoute {
   match: any;
@@ -13,7 +13,7 @@ class AddContactContainer extends React.Component<RouteComponentProps<AppRoute> 
 
   public render() {
     return (
-     <AddContactForm {...this.props}/>
+     <ContactForm {...this.props}/>
     );
   }
 }
