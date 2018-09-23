@@ -12,7 +12,7 @@ export function* fetchContacts() {
   } catch (error) {
     yield put({
       type: types.FETCH_CONTACTS_FAILURE,
-      payload: error.message,
+      payload: error,
     });
   }
 }

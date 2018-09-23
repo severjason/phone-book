@@ -2,7 +2,7 @@ import { AppContact, AppContactAction } from '../../Contact/interfaces';
 
 export interface AppHomeAction {
   type: string;
-  payload?: object[] ;
+  payload?: any;
 }
 
 export interface AppHomeState {
