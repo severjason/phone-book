@@ -1,27 +1,58 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { AppState } from '../../../store/interfaces';
 import { RouteComponentProps } from 'react-router';
 import { ContactForm } from '../../common';
+import { addContact } from '../redux/actions';
+import { AppContact, AppContactAction } from '../interfaces';
+import { AppState } from '../../../store/interfaces';
+import { fetchContacts } from '../../Home/redux/actions';
+import { AppHomeAction } from '../../Home/interfaces';
 
 interface AppRoute {
-  match: any;
   history: any;
 }
 
-class AddContactContainer extends React.Component<RouteComponentProps<AppRoute> & any, {}> {
+interface AppAddContactProps {
+  contacts: AppContact[];
+}
+
+interface AppAddContactDispatch {
+  addContact: (contact: object) => AppContactAction;
+  fetchContacts: () => AppHomeAction;
+}
+
+class AddContactContainer extends React.Component<RouteComponentProps<AppRoute>
+  & AppAddContactDispatch & AppAddContactProps, {}> {
+
+  public componentDidMount() {
+    const {fetchContacts, contacts} = this.props;
+    if (contacts.length === 0) {
+      fetchContacts();
+    }
+  }
+
+  private handleSubmit = (values: object) => {
+    const { addContact, history } = this.props;
+    addContact(values);
+    history.push('/');
+  }
 
   public render() {
     return (
-     <ContactForm {...this.props}/>
+     <ContactForm title="Add contact" onSubmit={this.handleSubmit}/>
     );
   }
 }
 
-const mapStateToProps = (state: AppState) => ({
-  inputValue: state.searchState.inputValue,
-});
+const mapStateToProps = (state: AppState) => {
+  return {
+    contacts: state.contactsState.contacts,
+  };
+};
 
-export default connect<any, {}>(
+export default connect<AppAddContactProps, AppAddContactDispatch>(
   mapStateToProps,
-)(AddContactContainer);
+  {
+    addContact,
+    fetchContacts,
+  })(AddContactContainer);

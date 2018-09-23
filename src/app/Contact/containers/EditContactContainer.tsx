@@ -6,6 +6,7 @@ import { EditContact } from '../components';
 import { AppContact, AppEditContactDispatch } from '../interfaces';
 import { fetchContacts } from '../../Home/redux/actions';
 import { formatNumber } from 'libphonenumber-js';
+import { updateContact } from '../redux/actions';
 
 interface AppRoute {
   match: any;
@@ -42,10 +43,17 @@ class EditContactContainer extends React.Component<RouteComponentProps<AppRoute>
     return editableContact;
   }
 
+  private handleSubmit = (values: object) => {
+    const { updateContact, history, match } = this.props;
+    // @ts-ignore
+    updateContact(values, +match.params.id);
+    history.push('/');
+  }
+
   public render() {
     const {contacts} = this.props;
     return (
-      contacts.length && <EditContact contact={this.getContact()}/>
+      contacts.length && <EditContact contact={this.getContact()} handleSubmit={this.handleSubmit}/>
     );
   }
 }
@@ -60,5 +68,6 @@ export default connect<AppEditContainerProps, AppEditContactDispatch>(
   mapStateToProps,
   {
     fetchContacts,
+    updateContact,
   }
 )(EditContactContainer);

@@ -8,11 +8,15 @@ interface EditContactProps {
     lastName: string;
     phones: string[];
   };
+  handleSubmit: (contact: object) => void;
 }
 
-const EditContact: React.StatelessComponent<EditContactProps> = ({contact}) => {
+const EditContact: React.StatelessComponent<EditContactProps> = ({contact, handleSubmit}) => {
   return (
-    contact ? <ContactForm initialValues={contact}/> : <Redirect to={'/add'}/>
+    // @ts-ignore
+    contact ?
+      <ContactForm title="Edit contact" onSubmit={handleSubmit} initialValues={contact} forEdit={true}/>
+      : <Redirect to={'/add'}/>
   );
 };
 

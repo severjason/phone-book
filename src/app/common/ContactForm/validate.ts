@@ -1,4 +1,5 @@
 import { isValidNumber } from 'libphonenumber-js';
+import { checkIfPhonesUnique } from '../../../helpers';
 
 interface AppFormValues {
   firstName: string;
@@ -17,6 +18,8 @@ const validate = (values: AppFormValues) => {
   }
   if (!values.phones || !values.phones.length) {
     errors.phones = {_error: 'At least one phone must be entered'};
+  } else if (!checkIfPhonesUnique(values.phones)) {
+    errors.phones = {_error: 'Phones should be unique'};
   } else {
     const phonesArrayErrors: string[] = [];
     values.phones.forEach((phone, index) => {

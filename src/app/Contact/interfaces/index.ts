@@ -17,9 +17,10 @@ export interface AppContactDivider {
 
 export interface AppContactAction {
   type: string;
-  payload?: number;
+  payload?: any;
 }
 
 export interface AppEditContactDispatch {
   fetchContacts: () => AppHomeAction;
+  updateContact: (contact: object, id: number) => AppContactAction;
 }

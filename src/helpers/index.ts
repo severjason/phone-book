@@ -1,4 +1,5 @@
 import { AppContact } from '../app/Contact/interfaces';
+import { uniq } from 'lodash';
 
 export const compareNames = (a: any, b: any) => {
   const nameA: string = a.name.first.toLowerCase();
@@ -47,3 +48,5 @@ export const filterContacts = (contacts: AppContact[], input: string) => {
     || contact.name.first.toLowerCase().includes(input.toLowerCase())
     || contact.name.last.toLowerCase().includes(input.toLowerCase()));
 };
+
+export const checkIfPhonesUnique = (phones: string[]): boolean => uniq(phones).length === phones.length;

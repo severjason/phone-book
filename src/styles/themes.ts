@@ -1,6 +1,6 @@
 export const mainTheme = {
   colors: {
-    mainColor: '#fff',
+    mainColor: '#000',
     whiteColor: '#fff',
     greyColor: '#eee',
     blueColor: '#2980b9',

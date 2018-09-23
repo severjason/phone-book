@@ -2,6 +2,9 @@ import { Field } from 'redux-form';
 import * as React from 'react';
 import renderField from './renderField';
 import { AsYouType } from 'libphonenumber-js';
+import RenderPhonesStyles from './renderPhonesStyles';
+import { IconButton, Tooltip, Paper } from '@material-ui/core';
+import { AddRounded, RemoveRounded } from '@material-ui/icons';
 
 const normalizePhone = (value: string) => {
   const onlyNums = value.replace(/[^\d]/g, '');
@@ -11,19 +14,21 @@ const normalizePhone = (value: string) => {
 const renderPhones = (props: any) => {
   const { fields, meta: { error } } = props;
   return (
-    <ul>
-      <li>
-        <button type="button" onClick={() => fields.push()}>Add Phone</button>
-      </li>
+    <RenderPhonesStyles>
+      <div className="add-phone-container">
+        <Tooltip title={'Add Phone'}>
+            <IconButton onClick={() => fields.push()}>
+              <AddRounded/>
+            </IconButton>
+        </Tooltip>
+      </div>
       {fields.map((phone: any, index: number) =>
-        <li key={index}>
-          <button
-            type="button"
-            title="Remove Hobby"
-            onClick={() => fields.remove(index)}
-          >
-            {`Remove Phone No.${index + 1}`}
-          </button>
+        <div key={index} className="phones-container">
+          <Tooltip title={`Remove Phone No.${index + 1}`}>
+            <IconButton onClick={() => fields.remove(index)}>
+              <RemoveRounded/>
+            </IconButton>
+          </Tooltip>
           <Field
             name={phone}
             type="text"
@@ -31,10 +36,15 @@ const renderPhones = (props: any) => {
             label={`Phone No.${index + 1}`}
             normalize={normalizePhone}
           />
-        </li>
+        </div>
       )}
-      {error && <li className="error">{error}</li>}
-    </ul>
+      {error && <Paper >
+        <p className="error">
+          {error}
+        </p>
+      </Paper>}
+
+    </RenderPhonesStyles>
   );
 };
 

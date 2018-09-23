@@ -34,7 +34,7 @@ class Contact extends React.PureComponent<AppContact & AppSearchDispatch, {}> {
                 {phone.length > 1 ? 'Phones:' : 'Phone:'}
               </Typography>
               <div className={`phones-container`}>
-                <Phone/>{phone.map((phone: any) => <div key={phone}>{phone}</div>)}
+                {phone.map((phone: any) => <a href={`tel:${phone}`} className="phone" key={phone}><Phone/>{phone}</a>)}
               </div>
             </Typography>
             <Divider/>

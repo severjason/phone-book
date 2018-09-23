@@ -9,7 +9,7 @@ const INITIAL_STATE: AppHomeState = {
   contacts: [],
 };
 
-export default function homeReducer(state: AppHomeState = INITIAL_STATE, action: AppHomeAction & AppContactAction) {
+export default function homeReducer(state: AppHomeState = INITIAL_STATE, action: AppContactAction & AppHomeAction) {
   switch (action.type) {
     case homeTypes.FETCH_CONTACTS_REQUEST: {
       return {
@@ -44,6 +44,37 @@ export default function homeReducer(state: AppHomeState = INITIAL_STATE, action:
       return {
         ...state,
         contacts: state.contacts.filter((contact: AppContact) => contact.id !== action.payload)
+      };
+    }
+    case contactTypes.ADD_CONTACT: {
+      return {
+        ...state,
+        contacts: [
+          ...state.contacts,
+          {
+            id: state.contacts.length + 1,
+            name: {
+              first: action.payload.firstName,
+              last: action.payload.lastName,
+            },
+            phone: action.payload.phones,
+            expanded: false,
+          }
+        ]
+      };
+    }
+    case contactTypes.UPDATE_CONTACT: {
+      return {
+        ...state,
+        contacts: state.contacts.map((contact: AppContact) => (contact.id === action.payload.id)
+          ? {
+            ...contact,
+            name: {
+              first: action.payload.contact.firstName,
+              last: action.payload.contact.lastName,
+            },
+            phone: action.payload.contact.phones,
+          } : contact),
       };
     }
     default: {

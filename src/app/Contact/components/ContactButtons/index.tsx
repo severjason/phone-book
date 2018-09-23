@@ -4,6 +4,7 @@ import { IconButton, Tooltip } from '@material-ui/core';
 import ContactButtonStyles from './styles';
 import { AlertDialog } from '../../../common';
 import { AppContactAction } from '../../interfaces';
+import { Link } from 'react-router-dom';
 
 interface AppContactButtonsProps {
   contactId: number;
@@ -35,11 +36,13 @@ class ContactButtons extends React.Component<AppContactButtonsProps, AppNoteButt
           opened={opened}
           onConfirm={() => deleteContact(contactId)}
         />
-        <Tooltip title={`Edit contact`}>
-          <IconButton onClick={() => console.log(contactId)} className="contact-button">
-            <EditOutlined className="contact-icon edit-icon"/>
-          </IconButton>
-        </Tooltip>
+          <Link to={`/edit/${contactId}`}>
+            <Tooltip title={`Edit contact`}>
+            <IconButton className="contact-button">
+              <EditOutlined className="contact-icon edit-icon"/>
+            </IconButton>
+            </Tooltip>
+          </Link>
         <Tooltip title={`Delete contact`}>
           <IconButton onClick={this.openDialog} className="contact-button">
             <DeleteForeverOutlined className="contact-icon delete-icon"/>

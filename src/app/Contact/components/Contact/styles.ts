@@ -9,9 +9,18 @@ const ContactStyles = styled.div`
   .phones-container {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     flex-wrap: nowrap;
-    padding: 1rem;
+    padding: .5rem .5rem .5rem 1rem;
+    
+    .phone {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      text-decoration: none;
+      color: ${props => props.theme.colors.mainColor}
+    }
   }
   .phones-header {
     padding: .5rem 1.5rem;

@@ -5,7 +5,7 @@ import { BaseLayout } from '../app/layouts';
 import { Helmet } from 'react-helmet';
 
 interface AppRoute {
-  match: any;
+  history: any;
 }
 const AddContactPage: React.StatelessComponent<RouteComponentProps<AppRoute>> = (props) => (
   <BaseLayout>
