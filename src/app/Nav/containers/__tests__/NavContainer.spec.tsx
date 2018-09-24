@@ -5,6 +5,9 @@ import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
 
 describe('Nav container test', () => {
+  let wrapper: any;
+  let instance: any;
+  let mockProps: any;
 
   beforeEach(() => {
     mockProps = {
@@ -23,8 +26,6 @@ describe('Nav container test', () => {
     instance = wrapper.instance();
   });
 
-  let wrapper: any;
-  let instance: any;
   const initialStore = {
     searchState: {
       inputValue: ''
@@ -33,8 +34,6 @@ describe('Nav container test', () => {
     clearSearchInput: jest.fn(),
     deleteContact: jest.fn(),
   };
-
-  let mockProps: any = {};
 
   const mockStore = configureStore();
   it('ConnectedNavContainer renders without crashing', () => {
