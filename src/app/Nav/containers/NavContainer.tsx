@@ -13,7 +13,8 @@ interface AppRoute {
   history: any;
 }
 
-class NavContainer extends React.PureComponent<RouteComponentProps<AppRoute> & AppNavDispatch & AppNavProps, any> {
+export class NavContainer extends
+  React.PureComponent<RouteComponentProps<AppRoute> & AppNavDispatch & AppNavProps, any> {
   private readonly debouncedSearch: any;
 
   constructor(props: RouteComponentProps<AppRoute> & AppNavDispatch & AppNavProps) {

@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { HomeContainer } from '../HomeContainer';
+import ConnectedHomeContainer, { HomeContainer } from '../HomeContainer';
 import { shallow } from 'enzyme';
 import { AppContact } from '../../../Contact/interfaces';
 import { AppHomeDispatch, AppHomeProps } from '../../interfaces';
+// @ts-ignore
+import configureStore from 'redux-mock-store';
 
 describe('Home container test', () => {
   const mockContacts: AppContact[] = [
@@ -27,6 +29,22 @@ describe('Home container test', () => {
   ];
 
   it('ConnectedHomeContainer should renders without crashing with initial state', () => {
+    const initialStore: any =  {
+      contactsState: {
+        isLoading: false,
+        contacts: [],
+        error: null,
+      },
+      fetchContacts: jest.fn(),
+      toggleContact: jest.fn(),
+      deleteContact: jest.fn(),
+    };
+    const mockStore = configureStore();
+    // @ts-ignore
+    expect(shallow(<ConnectedHomeContainer store={mockStore(initialStore)}/>)).toMatchSnapshot();
+  });
+
+  it('HomeContainer should renders without crashing with initial state', () => {
     const mockProps: AppHomeProps & AppHomeDispatch = {
       isLoading: false,
       contacts: [],
@@ -42,7 +60,7 @@ describe('Home container test', () => {
     expect(instance.props.fetchContacts).toBeCalled();
   });
 
-  it('ConnectedHomeContainer should renders without crashing with contacts', () => {
+  it('HomeContainer should renders without crashing with contacts', () => {
     const mockProps: AppHomeProps & AppHomeDispatch = {
       isLoading: false,
       contacts: mockContacts,
@@ -52,13 +70,12 @@ describe('Home container test', () => {
       deleteContact: jest.fn(),
     };
     const wrapper = shallow(<HomeContainer {...mockProps}/>);
-    const instance = wrapper.instance();
+    const instance: any = wrapper.instance();
     expect(wrapper).toMatchSnapshot();
-    // @ts-ignore
     expect(instance.props.fetchContacts).not.toBeCalled();
   });
 
-  it('ConnectedHomeContainer should renders with error', () => {
+  it('HomeContainer should renders with error', () => {
     const mockProps: AppHomeProps & AppHomeDispatch = {
       isLoading: false,
       contacts: [],
