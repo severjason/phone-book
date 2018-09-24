@@ -8,7 +8,7 @@ import { Home } from '../components';
 import { ErrorPage } from '../../common';
 import { toggleContact, deleteContact } from '../../Contact/redux/actions';
 
-class HomeContainer extends React.PureComponent<AppHomeProps & AppHomeDispatch, {}> {
+export class HomeContainer extends React.PureComponent<AppHomeProps & AppHomeDispatch, {}> {
 
   public componentDidMount() {
     const {fetchContacts, contacts} = this.props;

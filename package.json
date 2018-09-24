@@ -16,6 +16,8 @@
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-helmet": "^5.2.0",
+    "react-list": "^0.8.10",
+    "react-list-lazy-load": "^1.1.1",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
@@ -23,6 +25,7 @@
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
     "redux-form": "^7.4.2",
+    "redux-mock-store": "^1.5.3",
     "redux-saga": "^0.16.0",
     "reselect": "^3.0.1",
     "styled-components": "^3.4.8"

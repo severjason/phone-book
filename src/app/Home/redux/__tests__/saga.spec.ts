@@ -16,7 +16,6 @@ const mockContacts: AppContact[] = [{
   expanded: false,
 }];
 
-
 describe('Home saga test', () => {
   const action = actions.fetchContacts();
   // @ts-ignore
