@@ -1,33 +1,49 @@
 import * as React from 'react';
-import { connect }                         from 'react-redux';
-import { bindActionCreators, Dispatch }    from 'redux';
-import * as actions                        from '../../../actions';
-import { AppAction, AppAllActions, AppState, NoteProps } from '../../interfaces';
-import { FullNote }                            from '../components';
+import { connect } from 'react-redux';
+import { fetchContacts } from '../redux/actions';
+import { AppHomeDispatch, AppHomeProps } from '../interfaces';
+import { AppState } from '../../../store/interfaces';
+import { getSortedContactsWithDividers } from '../redux/selectors';
+import { Home } from '../components';
+import { ErrorPage } from '../../common';
+import { toggleContact, deleteContact } from '../../Contact/redux/actions';
 
-interface AppHomeDispatch {
-  actions: AppAllActions;
-}
+export class HomeContainer extends React.PureComponent<AppHomeProps & AppHomeDispatch, {}> {
 
-interface AppRoute {
-  match: any;
-}
+  public componentDidMount() {
+    const {fetchContacts, contacts} = this.props;
+    if (contacts.length === 0) {
+      fetchContacts();
+    }
+  }
 
-class NoteContainer extends React.Component<NoteProps & AppRoute & AppHomeDispatch, {}> {
-
-  render() {
+  public render() {
+    const {isLoading, error, toggleContact, deleteContact, contacts} = this.props;
     return (
-      <FullNote {...this.props}/>
+      error
+        ? <ErrorPage error={error}/>
+        : (
+          <Home
+            contacts={contacts}
+            isLoading={isLoading}
+            toggleContact={toggleContact}
+            deleteContact={deleteContact}
+          />
+        )
     );
   }
 }
 
-export default connect<NoteProps, AppHomeDispatch>(
-  (state: AppState) => ({
-    notes: state.notes.byId,
-    activeCategory: state.categories.activated,
-  }),
-  (dispatch: Dispatch<AppAction>) => ({
-    actions: bindActionCreators(actions, dispatch)
-  })
-)(NoteContainer);
+const mapStateToProps = (state: AppState) => ({
+  isLoading: state.contactsState.isLoading,
+  contacts: getSortedContactsWithDividers(state.contactsState),
+  error: state.contactsState.error,
+});
+
+export default connect<AppHomeProps, AppHomeDispatch>(
+  mapStateToProps,
+  {
+    fetchContacts,
+    toggleContact,
+    deleteContact,
+  })(HomeContainer);
